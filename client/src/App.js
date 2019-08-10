@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Tech from "./components/technology";
+import Analyze from "./pages/Analyze";
+
 
 
 // const App = () => <Tech />;
 
 class App extends Component {
+
+componentDidMount() {
+  //render database data tables
+  //make all API calls to update all states across components
+
+};
+
+
   render() {
     return (
       <div className="App">
@@ -15,15 +24,15 @@ class App extends Component {
 
           <h2>HEllO People</h2>
           <input></input>
-          <button> Search </button>
+          <button className= "apisearch"> Search </button>
           
         </div> 
         
-        <Tech />
+        <Analyze />
 
 
 
-        
+
       </div>
     );
   }

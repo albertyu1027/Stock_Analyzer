@@ -1,10 +1,10 @@
 import React from "react";
+import "./technology.css"
 
 // import "./technology.css"
 
-const Tech = () => (
-
-<table class="table">
+const Tech = props =>
+<table className="table">
   <thead>
     <tr>
       <th scope="col">Technology</th>
@@ -13,6 +13,7 @@ const Tech = () => (
       <th scope="col">PT</th>
       <th scope="col">200MA</th>
       <th scope="col">50MA</th>
+      <th scope="col">Date</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,7 @@ const Tech = () => (
       <td>@mdo</td>
       <td>@mdo</td>
       <td>@mdo</td>
+      <td>hi</td>
     </tr>
     <tr>
       <th scope="row">2</th>
@@ -31,6 +33,7 @@ const Tech = () => (
       <td>@fat</td>
       <td>@fat</td>
       <td>@fat</td>
+      <td>hi</td>
     </tr>
     <tr>
       <th scope="row">3</th>
@@ -39,10 +42,9 @@ const Tech = () => (
       <td>@twitter</td>
       <td>@twitter</td>
       <td>@twitter</td>
+      <td>hi</td>
     </tr>
   </tbody>
 </table>
-
-);
 
 export default Tech;
