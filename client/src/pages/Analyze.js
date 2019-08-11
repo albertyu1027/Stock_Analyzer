@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Tech from "../components/technology";
 import RE from "../components/real_estate";
+import Nav from "../components/Nav"
 
 class Analyze extends Component {
 	state = {
@@ -14,21 +15,16 @@ class Analyze extends Component {
 	};	
 
 
-
-
-
 render() {
 	return (
 		<div>
-		<Tech />
-		<RE />
 
+		<Nav />
+		<RE />
+		<Tech />
 
 		</div>
 		
-
-		
-
 	);
 	}
 

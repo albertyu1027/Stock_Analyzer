@@ -1,7 +1,6 @@
 .table {
 	height: 100px;
 	border: 6px solid black;
-	position: fixed;
 	float: left;
 	margin: 0 auto;
 	padding: 10px;

@@ -1,0 +1,11 @@
+.table {
+	height: 100px;
+	border: 6px solid black;
+	position: relative;
+	float: left;
+	margin: 0 auto;
+	padding: 10px;
+	border-spacing: 5px; 
+	margin: 10px; 
+
+}

@@ -15,23 +15,15 @@ componentDidMount() {
 
 };
 
+// <img src={logo} className="App-logo" alt="logo" />
 
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        <br />
+        <br />
 
-          <h2>HEllO People</h2>
-          <input></input>
-          <button className= "apisearch"> Search </button>
-          
-        </div> 
-        
         <Analyze />
-
-
-
 
       </div>
     );
