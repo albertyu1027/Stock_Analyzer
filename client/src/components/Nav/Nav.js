@@ -5,9 +5,9 @@ const Nav = () =>
   <nav className="navbar">
     <div className="container-fluid">
       <div>
-          <a href="#home">Home</a>
-          <a href="#news">Analyze top Picks</a>
-          <a href="#contact">Sentiment</a>
+          <a href="/">Home</a>
+          <a href="Fundamentals">Analyze top Picks</a>
+          <a href="Sentiment">Sentiment</a>
         <br />
         <input className ="search"></input>
         <button type="button">

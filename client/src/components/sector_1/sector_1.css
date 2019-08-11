@@ -1,0 +1,9 @@
+.table {
+	height: 100px;
+	border: 6px solid black;
+	margin: 0 auto;
+	padding: 10px;
+	border-spacing: 5px; 
+	margin: 10px; 
+
+}
