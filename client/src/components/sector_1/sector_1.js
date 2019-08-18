@@ -1,15 +1,29 @@
 import React, { Component } from "react";
-import "./sector_1.css"
+import "./sector_1.css";
 import DataTable from 'react-data-table-component';
+import API from "../../utils/API";
 
-const data = [
+const apidata = [{
+  stock: "RTN",
+  pe: 10,
+  pr: 100,
+  profit: 50,
+  pt: 400
+}]
+
+// loaddata = () => {
+//   API.getQuote()
+//     .then(res =>)
+// }
+
+const dataset = [
   { id: 1, 
-    market: 'API', 
-    pe: '30', 
-    pr: '100', 
-    profit: '100', 
+    market: apidata[0].stock, 
+    pe: apidata[0].pe, 
+    pr: apidata[0].pr, 
+    profit: apidata[0].profit, 
     marketcap: '100',
-    pt: '100',
+    pt: apidata[0].pt,
     rg1: '100',
     rg2: '100',
     rg3: '100',
@@ -150,13 +164,30 @@ const columns = [
 ];
  
 class S1 extends Component {
+    constructor(props) {
+    super(props);
+    this.state = {
+    market: 'baba', 
+    pe: '', 
+    pr: '', 
+    profit: '', 
+    marketcap: '',
+    pt: '', 
+    rg1: '',
+    rg2: '',
+    rg3: '',
+    dcfpt: '',
+    prpt: '',
+    pept: ''
+  };
+}
 
   render() {
     return (
       <DataTable
-        title="Sector 1"
+        title="Industrials"
         columns={columns}
-        data={data}
+        data={dataset}
       />
     )
   }

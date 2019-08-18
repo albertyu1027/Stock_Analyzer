@@ -3,7 +3,7 @@ import './Nav.css';
 
 const Nav = () =>
   <nav className="navbar">
-    <div className="container-fluid">
+    <div>
       <div>
           <a href="/">Home</a>
           <a href="Fundamentals">Analyze top Picks</a>

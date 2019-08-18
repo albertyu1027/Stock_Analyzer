@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./besttotrade.css"
 import DataTable from 'react-data-table-component';
+import S1 from "../sector_1";
 
 const data = [
   { id: 1, 
@@ -198,6 +199,7 @@ const columns = [
     right: true,
   }
 ];
+
  
 class BTT extends Component {
 
@@ -207,7 +209,10 @@ class BTT extends Component {
         title="Best Available"
         columns={columns}
         data={data}
+        responsive
+        className = 'table1'
       />
+
     )
   }
 };

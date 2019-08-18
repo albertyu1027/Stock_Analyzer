@@ -17,7 +17,6 @@ render() {
 		<br />
 
 		<BTT />
-		<Cheat />
 
 		</div>
 		
