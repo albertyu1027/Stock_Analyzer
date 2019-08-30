@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import "./besttotrade.css"
 import DataTable from 'react-data-table-component';
 import S1 from "../sector_1";
+import API from "../../utils/API";
 
 const data = [
   { id: 1, 
-    market: 'render best', 
+    market: 'MDB', 
     current: '30', 
     direction: '100', 
     time: '100', 
@@ -202,6 +203,15 @@ const columns = [
 
  
 class BTT extends Component {
+
+  componentDidMount() { 
+
+  API.getQuote()
+  .then(res => {
+    console.log(res.data)
+  })
+
+}
 
   render() {
     return (

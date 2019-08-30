@@ -20,9 +20,13 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
-    "express": "^4.15.4",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.0",
+    "https": "^1.0.0",
     "react-data-table-component": "^3.0.5",
     "react-router-dom": "^5.0.1",
+    "request": "^2.88.0",
     "styled-components": "^4.3.2"
   }
 }

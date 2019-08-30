@@ -4,6 +4,8 @@ import Cheat from "../components/cheatsheet";
 import BTT from "../components/best_to_trade";
 import Nav from "../components/Nav";
 
+
+
 class Analyze extends Component {
 
 
@@ -17,6 +19,8 @@ render() {
 		<br />
 
 		<BTT />
+		
+		add a Black Scholes calculator
 
 		</div>
 		
