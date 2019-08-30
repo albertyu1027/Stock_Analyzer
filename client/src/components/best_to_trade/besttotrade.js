@@ -4,140 +4,7 @@ import DataTable from 'react-data-table-component';
 import S1 from "../sector_1";
 import API from "../../utils/API";
 
-const data = [
-  { id: 1, 
-    market: 'MDB', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 2, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 3, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 4, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 5, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 6, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 7, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 8, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 9, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 10, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  },
-  { id: 11, 
-    market: 'render best', 
-    current: '30', 
-    direction: '100', 
-    time: '100', 
-    iv: '100',
-    hv: '100',
-    skew: '100',
-    rsi: '100',
-    ma: '100',
-    strategy: '100'
-  }
-];
+const data = [{}];
 
 const columns = [
   {
@@ -204,11 +71,48 @@ const columns = [
  
 class BTT extends Component {
 
-  componentDidMount() { 
+  constructor(props) {
+    super(props);
+    this.state = {
+      tableData: [],
+    };
+  }
 
-  API.getQuote()
+
+  componentDidMount() { 
+    const search = 'aapl'
+  API.getQuote(search)
   .then(res => {
-    console.log(res.data)
+    // console.log(res.data)
+      this.setState({
+        tableData: 
+        [{
+            market: search,
+            current_price: res.data.delayedPrice,
+            direction: '100', 
+            time: '100', 
+            iv: '100',
+            hv: '100',
+            skew: '100',
+            rsi: '100',
+            ma: '100',
+            strategy: '100'
+        }, 
+        {
+            market: res.data.symbol,
+            current_price: res.data.delayedPrice,
+            direction: '100', 
+            time: '100', 
+            iv: '100',
+            hv: '100',
+            skew: '100',
+            rsi: '100',
+            ma: '100',
+            strategy: '100'
+        }
+        ]
+    })
+      console.log(this.state)
   })
 
 }
@@ -218,7 +122,7 @@ class BTT extends Component {
       <DataTable
         title="Best Available"
         columns={columns}
-        data={data}
+        data={ this.state.tableData }
         responsive
         className = 'table1'
       />

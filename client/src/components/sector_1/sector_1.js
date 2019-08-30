@@ -3,92 +3,6 @@ import "./sector_1.css";
 import DataTable from 'react-data-table-component';
 import API from "../../utils/API";
 
-const apidata = [{
-  stock: "RTN",
-  pe: 10,
-  pr: 100,
-  profit: 50,
-  pt: 400
-}]
-
-// loaddata = () => {
-//   API.getQuote()
-//     .then(res =>)
-// }
-
-const dataset = [
-  { id: 1, 
-    market: apidata[0].stock, 
-    pe: apidata[0].pe, 
-    pr: apidata[0].pr, 
-    profit: apidata[0].profit, 
-    marketcap: '100',
-    pt: apidata[0].pt,
-    rg1: '100',
-    rg2: '100',
-    rg3: '100',
-    dcfpt: '100',
-    prpt: '100',
-    pept: '100'
-  },
-  { id: 2, 
-    market: 'API', 
-    pe: '40', 
-    pr: '100', 
-    profit: '100', 
-    marketcap: '100',
-    pt: '100',
-    rg1: '100',
-    rg2: '100',
-    rg3: '100',
-    dcfpt: '100',
-    prpt: '100',
-    pept: '100'
-  },
-  { id: 3, 
-    market: 'API', 
-    pe: '50', 
-    pr: '100', 
-    profit: '100', 
-    marketcap: '100',
-    pt: '100',
-    rg1: '100',
-    rg2: '100',
-    rg3: '100',
-    dcfpt: '100',
-    prpt: '100',
-    pept: '100'
-  },
-  { id: 4, 
-    market: 'API', 
-    pe: '60', 
-    pr: '100', 
-    profit: '100', 
-    marketcap: '100',
-    pt: '100',
-    rg1: '100',
-    rg2: '100',
-    rg3: '100',
-    dcfpt: '100',
-    prpt: '100',
-    pept: '100'
-  },
-  { id: 5, 
-    market: 'API', 
-    pe: '70', 
-    pr: '100', 
-    profit: '100', 
-    marketcap: '100',
-    pt: '100',
-    rg1: '100',
-    rg2: '100',
-    rg3: '100',
-    dcfpt: '100',
-    prpt: '100',
-    pept: '100'
-  }
-];
-
 const columns = [
   {
     name: 'Market',
@@ -108,13 +22,13 @@ const columns = [
     right: true,
   },
   {
-    name: 'Profit',
+    name: 'Profit in Mil (latest quarter)',
     selector: 'profit',
     sortable: true,
     right: true,
   },
   {
-    name: 'MC',
+    name: 'MC (in Bil)',
     selector: 'marketcap',
     sortable: true,
     right: true,
@@ -162,24 +76,61 @@ const columns = [
     right: true,
   }
 ];
+
+
+//call database for a watchlist of stocks.
  
 class S1 extends Component {
     constructor(props) {
     super(props);
     this.state = {
-    market: 'baba', 
-    pe: '', 
-    pr: '', 
-    profit: '', 
-    marketcap: '',
-    pt: '', 
-    rg1: '',
-    rg2: '',
-    rg3: '',
-    dcfpt: '',
-    prpt: '',
-    pept: ''
+      tableData: []
   };
+}
+
+componentDidMount() {
+
+  
+//first stock on list. Have API.js make calls through watchlist in
+  API.getQuote()
+  .then(res => {
+
+  //calculate price targets 
+  //price to earnings
+  const PT1 = 123
+
+  //price to revenue
+  const PT2 = 13141
+
+  //DCF
+  const PT3 = 3131
+
+  const PT = (PT1 + PT2 + PT3)/3
+
+    // console.log(res.data)
+
+  API.getRevenue().then(res2 =>{
+      // console.log(res2.data)
+    this.setState({
+        tableData: [{
+          market: res.data.symbol, 
+          pe: res.data.peRatio, 
+          pr: 'api call', 
+          profit: (res2.data.cashflow[0].netIncome)/1000000, 
+          marketcap: (res.data.marketCap/1000000000),
+          pt: PT,
+          rg1: 'api call',
+          rg2: 'api call',
+          rg3: 'api call',
+          dcfpt: 'calc',
+          prpt: 'calc',
+          pept: 'calc'
+        }]
+      })
+    })
+  })
+
+
 }
 
   render() {
@@ -187,7 +138,7 @@ class S1 extends Component {
       <DataTable
         title="Industrials"
         columns={columns}
-        data={dataset}
+        data={this.state.tableData}
       />
     )
   }
