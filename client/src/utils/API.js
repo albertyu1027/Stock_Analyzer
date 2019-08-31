@@ -5,19 +5,17 @@ const APIKEYencrypted = encodeURIComponent(APIKEY)
 
 //grab watchlist from database.
 //if sector = industrials, show on list
-const stocksearch = ['RTN', 'LMT', 'BA', 'NOC', 'FDX']
+
 
 
 export default {
-  getQuote: function() {
-    return axios.get("https://sandbox.iexapis.com/stable/stock/" + stocksearch[0] + "/quote?token=Tpk_23147acc44694325971560f25873ffbc");
+  getQuote: function(query) {
+    return axios.get("https://sandbox.iexapis.com/stable/stock/" + query + "/quote?token=Tpk_23147acc44694325971560f25873ffbc");
   },
-  getRevenue: function() {
-    return axios.get("https://sandbox.iexapis.com/stable/stock/" + stocksearch[0] + "/cash-flow?token=Tpk_23147acc44694325971560f25873ffbc");
-  },
-  getEarningsPerShare: function() {
-    return axios.get("https://cloud.iexapis.com");
+  getRevenue: function(query) {
+    return axios.get("https://sandbox.iexapis.com/stable/stock/" + query + "/cash-flow?token=Tpk_23147acc44694325971560f25873ffbc");
   }
+
 };
 
 
