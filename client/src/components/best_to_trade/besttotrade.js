@@ -80,40 +80,40 @@ class BTT extends Component {
 
 
   componentDidMount() { 
-    const search = 'aapl'
-  API.getQuote(search)
-  .then(res => {
-    // console.log(res.data)
-      this.setState({
-        tableData: 
-        [{
-            market: search,
-            current_price: res.data.delayedPrice,
-            direction: '100', 
-            time: '100', 
-            iv: '100',
-            hv: '100',
-            skew: '100',
-            rsi: '100',
-            ma: '100',
-            strategy: '100'
-        }, 
-        {
-            market: res.data.symbol,
-            current_price: res.data.delayedPrice,
-            direction: '100', 
-            time: '100', 
-            iv: '100',
-            hv: '100',
-            skew: '100',
-            rsi: '100',
-            ma: '100',
-            strategy: '100'
-        }
-        ]
-    })
-      console.log(this.state)
-  })
+  //   const search = 'aapl'
+  // API.getQuote(search)
+  // .then(res => {
+  //   // console.log(res.data)
+  //     this.setState({
+  //       tableData: 
+  //       [{
+  //           market: search,
+  //           current_price: res.data.delayedPrice,
+  //           direction: '100', 
+  //           time: '100', 
+  //           iv: '100',
+  //           hv: '100',
+  //           skew: '100',
+  //           rsi: '100',
+  //           ma: '100',
+  //           strategy: '100'
+  //       }, 
+  //       {
+  //           market: res.data.symbol,
+  //           current_price: res.data.delayedPrice,
+  //           direction: '100', 
+  //           time: '100', 
+  //           iv: '100',
+  //           hv: '100',
+  //           skew: '100',
+  //           rsi: '100',
+  //           ma: '100',
+  //           strategy: '100'
+  //       }
+  //       ]
+  //   })
+  //     console.log(this.state)
+  // })
 
 }
 
