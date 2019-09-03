@@ -102,55 +102,44 @@ class S1 extends Component {
 
 componentDidMount() {
   //call database for the stocks
-let beststock1;
 
+let bestpick;
+let beststock;
+let stockarray = ['GOOG', 'FB', 'tsla' , 'baba', 'NFLX']
 
-API.getQuote('RTN', 'LMT', 'NOC', 'BA', 'FDX').then(res => {
-  console.log(res)
+API.getQuote(
+  stockarray[0],
+  stockarray[1],
+  stockarray[2],
+  stockarray[3],
+  stockarray[4],
+
+  ).then(res => {
+  // console.log(res)
 
 
   //function to rank the best stock
-  const rankingfunction = (a, b) => {
+  const rankingfunction = () => {
     // console.log(a + b);
 
-    for (var i=0; i<5; i++) {
-      //first look for the stock with lowest PE and PEG
-      let lowestPE = Math.min(res[i].data.peRatio)
-      // let lowestPEG = Math.min(res[i].data.pegRatio)
-      console.log(lowestPE)
-      if (lowestPE === res[i].data.peRatio && lowestPE>0){
-      beststock1 = res[i].data.symbol
-      console.log(beststock1)
-      return beststock1
+      const array = []
+
+      for (var a=0; a<5; a++) {
+        if (res[a].data.pegRatio > 0 && 
+            res[a].data.profitMargin > 0) 
+            {
+             bestpick = Math.min(res[a].data.pegRatio)
+             beststock = res[a].data.companyName
+            }
       }
-      else {console.log('no')}
-    }
 
+      // console.log(bestpick)
+      // console.log(beststock)
 
-
-  for (var i=0; i<5; i++) {
-    
-    // console.log(res[i].data.peRatio)
-
-    // if (res[i].data.peRatio < res[i+1].data.peRatio) 
-    // {
-    //   console.log(res[i].data.symbol)
-    //   return
-    // }
-    // else 
-    // {
-    //   console.log('good')
-    //   return
-    // }
-  }
-    
-
-    beststock1 = 're3223'
-    console.log(beststock1)
+      }
   
-  }
 
-  rankingfunction(4,6)
+  rankingfunction()
  
   // //calculate price targets 
   // //price to earnings
@@ -168,12 +157,12 @@ API.getQuote('RTN', 'LMT', 'NOC', 'BA', 'FDX').then(res => {
   //setState
   this.setState({
         tableData: [{
-          market: res[0].data.symbol, 
+          market: res[5].data.symbol, 
           pe: res[0].data.peRatio, 
-          peg: res[5].data.pegRatio,
-          pr: res[5].data.priceToSales, 
-          profit: (res[5].data.profitMargin).toFixed(2), 
-          marketcap: (res[0].data.marketCap/1000000000).toFixed(2),
+          peg: res[0].data.pegRatio,
+          pr: res[0].data.priceToSales, 
+          profit: (res[0].data.profitMargin).toFixed(2), 
+          marketcap: (res[0].data.marketcap/1000000000).toFixed(2),
           pt: 0,
           opt: res[10].data,
           // rg1: 'api call',
@@ -188,12 +177,12 @@ API.getQuote('RTN', 'LMT', 'NOC', 'BA', 'FDX').then(res => {
   this.setState({
         tableData: [...this.state.tableData, 
         {
-          market: res[1].data.symbol, 
+          market: res[6].data.symbol, 
           pe: res[1].data.peRatio, 
-          peg: res[6].data.pegRatio,
-          pr: res[6].data.priceToSales, 
-          profit: (res[6].data.profitMargin).toFixed(2), 
-          marketcap: (res[1].data.marketCap/1000000000).toFixed(2),
+          peg: res[1].data.pegRatio,
+          pr: res[1].data.priceToSales, 
+          profit: (res[1].data.profitMargin).toFixed(2), 
+          marketcap: (res[1].data.marketcap/1000000000).toFixed(2),
           pt: 0,
           opt: res[11].data,
           // rg1: 'api call',
@@ -208,12 +197,12 @@ API.getQuote('RTN', 'LMT', 'NOC', 'BA', 'FDX').then(res => {
   this.setState({
         tableData: [...this.state.tableData, 
         {
-          market: res[2].data.symbol, 
+          market: res[7].data.symbol, 
           pe: res[2].data.peRatio, 
-          peg: res[7].data.pegRatio,
-          pr: res[7].data.priceToSales, 
-          profit: (res[7].data.profitMargin).toFixed(2), 
-          marketcap: (res[2].data.marketCap/1000000000).toFixed(2),
+          peg: res[2].data.pegRatio,
+          pr: res[2].data.priceToSales, 
+          profit: (res[2].data.profitMargin).toFixed(2), 
+          marketcap: (res[2].data.marketcap/1000000000).toFixed(2),
           pt: 0,
           opt: res[12].data,
           // rg1: 'api call',
@@ -229,12 +218,12 @@ API.getQuote('RTN', 'LMT', 'NOC', 'BA', 'FDX').then(res => {
   this.setState({
         tableData: [...this.state.tableData, 
         {
-          market: res[3].data.symbol, 
+          market: res[8].data.symbol, 
           pe: res[3].data.peRatio, 
-          peg: res[8].data.pegRatio,
-          pr: res[8].data.priceToSales, 
-          profit: (res[8].data.profitMargin).toFixed(2), 
-          marketcap: (res[3].data.marketCap/1000000000).toFixed(2),
+          peg: res[3].data.pegRatio,
+          pr: res[3].data.priceToSales, 
+          profit: (res[3].data.profitMargin).toFixed(2), 
+          marketcap: (res[3].data.marketcap/1000000000).toFixed(2),
           pt: 0,
           opt: res[13].data,
           // rg1: 'api call',
@@ -250,12 +239,12 @@ API.getQuote('RTN', 'LMT', 'NOC', 'BA', 'FDX').then(res => {
   this.setState({
         tableData: [...this.state.tableData, 
         {
-          market: res[4].data.symbol, 
+          market: res[9].data.symbol, 
           pe: res[4].data.peRatio, 
-          peg: res[9].data.pegRatio,
-          pr: res[9].data.priceToSales, 
-          profit: (res[9].data.profitMargin).toFixed(2), 
-          marketcap: (res[4].data.marketCap/1000000000).toFixed(2),
+          peg: res[4].data.pegRatio,
+          pr: res[4].data.priceToSales, 
+          profit: (res[4].data.profitMargin).toFixed(2), 
+          marketcap: (res[4].data.marketcap/1000000000).toFixed(2),
           pt: 0,
           opt: res[14].data,
           // rg1: 'api call',
