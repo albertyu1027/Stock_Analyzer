@@ -4,7 +4,6 @@ import DataTable from 'react-data-table-component';
 import S1 from "../sector_1";
 import API from "../../utils/API";
 
-const data = [{}];
 
 const columns = [
   {
@@ -80,6 +79,24 @@ class BTT extends Component {
 
 
   componentDidMount() { 
+
+    <S1 />
+
+    this.setState({
+      tableData: 
+        [{
+            market: 'RTN',
+            current_price: 1222,
+            direction: '100', 
+            time: '100', 
+            iv: '100',
+            hv: '100',
+            skew: '100',
+            rsi: '100',
+            ma: '100',
+            strategy: '100'
+        }]
+    })
   //   const search = 'aapl'
   // API.getQuote(search)
   // .then(res => {
@@ -126,6 +143,8 @@ class BTT extends Component {
         responsive
         className = 'table1'
       />
+ 
+
 
     )
   }

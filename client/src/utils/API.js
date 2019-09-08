@@ -4,6 +4,11 @@ import axios from "axios";
 
 
 export default {
+
+  // addToWatchlist: function () {
+  //       return axios.get("/api/watchlist");
+  // },
+
   getQuote: function(a,b,c,d,e) {
 
   	//api call #1 for quote data
@@ -12,6 +17,7 @@ export default {
   	let stockquote3 = "https://cloud.iexapis.com/stable/stock/" + c + "/quote?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
   	let stockquote4 = "https://cloud.iexapis.com/stable/stock/" + d + "/quote?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
   	let stockquote5 = "https://cloud.iexapis.com/stable/stock/" + e + "/quote?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
+
 
   	//api call #2 for financials and advanced stats data. this is annual revenue
   	//financials 
@@ -22,12 +28,19 @@ export default {
   	let stockfinancials5 = "https://cloud.iexapis.com/stable/stock/" + e + "/advanced-stats?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
 
   	// let stockfinancialshuh = "https://cloud.iexapis.com/stable/stock/" + a + "/financials?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
-
+  	//api call #3 for price target
   	let stockpt1 = "https://cloud.iexapis.com/stable/data-points/" + a + "/PRICE-TARGET?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
   	let stockpt2 = "https://cloud.iexapis.com/stable/data-points/" + b + "/PRICE-TARGET?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
   	let stockpt3 = "https://cloud.iexapis.com/stable/data-points/" + c + "/PRICE-TARGET?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
   	let stockpt4 = "https://cloud.iexapis.com/stable/data-points/" + d + "/PRICE-TARGET?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
   	let stockpt5 = "https://cloud.iexapis.com/stable/data-points/" + e + "/PRICE-TARGET?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
+
+  	//api call #4 for balanace sheet data
+  	let stockbs1 = "https://cloud.iexapis.com/stable/stock/" + a + "/balance-sheet?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
+  	let stockbs2 = "https://cloud.iexapis.com/stable/stock/" + b + "/balance-sheet?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
+  	let stockbs3 = "https://cloud.iexapis.com/stable/stock/" + c + "/balance-sheet?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
+  	let stockbs4 = "https://cloud.iexapis.com/stable/stock/" + d + "/balance-sheet?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
+  	let stockbs5 = "https://cloud.iexapis.com/stable/stock/" + e + "/balance-sheet?token=pk_51bdaef9e7324c8f80fa7f6bbe14323a"
 
   	const promise1 = axios.get(stockfinancials1)
   	const promise2 = axios.get(stockfinancials2)
@@ -44,12 +57,22 @@ export default {
   	const promise13 = axios.get(stockpt3)
   	const promise14 = axios.get(stockpt4)
   	const promise15 = axios.get(stockpt5)
+  	const promise16 = axios.get(stockbs1)
+  	const promise17 = axios.get(stockbs2)
+  	const promise18 = axios.get(stockbs3)
+  	const promise19 = axios.get(stockbs4)
+  	const promise20 = axios.get(stockbs5)
+
+
 
 
   	return Promise.all([
-  		promise1, promise2, promise3, promise4, promise5, 
-  		promise6, promise7, promise8, promise9, promise10,
+  		promise1, 
+  		promise2, promise3, promise4, promise5, 
+  		promise6, 
+  		promise7, promise8, promise9, promise10,
   		promise11, promise12, promise13, promise14, promise15,
+  		promise16, promise17, promise18, promise19, promise20
 
   	]).then(function(stockarray) {
   	return stockarray
