@@ -1,17 +1,20 @@
 const router = require("express").Router();
+const Stocks = require("../../models/beststocks");
 const watchlistController = require("../../controllers/watchlistController");
 
-// Matches with "/api/books"
+
+// router.post("/", watchlistController.insert);
+
+// router.post("/stockstotrade", watchlistController.findAll())
+
 router.route("/")
   .get(watchlistController.findAll)
-  .post(watchlistController.create);
-// Matches with "/api/books/:id"
-router
-  .route("/:UserID")
-  .get(watchlistController.findById);
+  .post(watchlistController.create)
 
 router
-  .route("/email/:username")
-  .get(watchlistController.findByUsername);
+  .route("/:id")
+  .get(watchlistController.findById)
+  .put(watchlistController.update)
+  .delete(watchlistController.remove);
 
 module.exports = router;

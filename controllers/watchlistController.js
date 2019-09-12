@@ -1,22 +1,36 @@
 const db = require("../models");
-// Defining methods for the StocksToTradeController
+var request = require("request");
+// const ObjectId = require("mongodb").ObjectID;
+// const stocks = require("../models/beststocks");
+
+// Defining methods for the stockController
 module.exports = {
+  // insert: function(array_of_object, res) {
+  //   db.stocks.insert(array_of_object)
+  //   .then(dbModel => res.json(dbModel))
+  //   .catch(err => res.status(422).json(err));
+  // },
+  // findAll: function(req, res) {
+  //   db.stocks
+  //     .find()
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // },
+
+
+
+
+
   findAll: function(req, res) {
     db.StocksToTrade
       .find(req.query)
+      .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
     db.StocksToTrade
-      .find({UserID: req.params.UserID})
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  findByUsername: function(req, res) {
-    console.log(req.params.username);
-    db.StocksToTrade
-      .find({username: req.params.username})
+      .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -32,6 +46,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  insert: function(req, res) {
+    db.StocksToTrade
+      .insert([{stock1: 'baba'}])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
   remove: function(req, res) {
     db.StocksToTrade
       .findById({ _id: req.params.id })
@@ -39,4 +60,5 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
+ 
 };

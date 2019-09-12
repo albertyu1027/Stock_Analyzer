@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./besttotrade.css"
 import DataTable from 'react-data-table-component';
-import S1 from "../sector_1";
 import API from "../../utils/API";
+
+
+
 
 
 const columns = [
@@ -80,12 +82,17 @@ class BTT extends Component {
 
   componentDidMount() { 
 
-    <S1 />
+  API.getWatchlist().then(res =>{
+    console.log(res)
+    
+  })
+
+    // <S1 />
 
     this.setState({
       tableData: 
         [{
-            market: 'RTN',
+            market: this.props.stockTWO,
             current_price: 1222,
             direction: '100', 
             time: '100', 
@@ -135,6 +142,10 @@ class BTT extends Component {
 }
 
   render() {
+
+    // console.log(this.props);
+
+
     return (
       <DataTable
         title="Best Available"

@@ -39,12 +39,12 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 
 
-// // A GET route 
+// A GET route 
 // app.get("/stockstotrade", function(req, res) {
-//   // First, we grab the body of the html with request
-//   axios.get("http://www.localhost3000").then(function(response) {
-//     // Then, we load that into cheerio and save it to $ for a shorthand selector
-//     var $ = cheerio.load(response.data);
+// //   // First, we grab the body of the html with request
+//   axios.get("http://www.localhost/stockstotrade").then(function(response) {
+// //     // Then, we load that into cheerio and save it to $ for a shorthand selector
+//     // var $ = cheerio.load(response.data);
 
 //     console.log(response.data)
 
@@ -67,32 +67,33 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 //         });
 //     });
 //   });
-// // });
-
-
-
-
-
-
-
-
-
-
-
-// // Route for getting all Articles from the db
-// app.get("/stockstotrade", function(req, res) {
-//   // Grab every document in the Articles collection
-//   db.StocksToTrade
-//     .find({})
-//     .then(function(dbStocks) {
-//       // If we were able to successfully find Articles, send them back to the client
-//       res.json(dbStocks);
-//     })
-//     .catch(function(err) {
-//       // If an error occurred, send it to the client
-//       res.json(err);
-//     });
 // });
+
+
+
+
+
+
+
+
+
+
+
+// Route for getting all Articles from the db
+app.get("/", function(req, res) {
+  // Grab every document in the Articles collection
+  db.stocks
+    .find()
+    .insert([{stock1: 'baba'}])
+    .then(function(dbStocks) {
+      // If we were able to successfully find Articles, send them back to the client
+      res.json(dbStocks);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
 
 
 

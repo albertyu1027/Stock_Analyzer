@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./sector_1.css";
 import DataTable from 'react-data-table-component';
 import API from "../../utils/API";
+import BTT from "../best_to_trade";
+
 
 const columns = [
   {
@@ -91,36 +93,79 @@ const columns = [
 
 
 
-
 //call database for a watchlist of stocks.
  
 class S1 extends Component {
     constructor(props) {
     super(props);
     this.state = {
-      tableData: []
+      tableData: [],
+      stock1: '',
+      stock2: '',
+      stock3: '',
+      stock4: '',
+      stock5: '',
+      stock6: '',
+      stock7: '',
+      stock8: '',
+      stock9: '',
+      stock10: '',
+      stock11: ''
 
   };
 }
 
 componentDidMount() {
+
   //call database for the stocks
+  let stockarray = ['WMT', 'LMT', 'BA' , 'NOC', 'FDX', 'SQ', 'SAFM', 'TSN', 'MDB', 'BABA', 'PG']
+
+    // console.log(this.state)
+
+  API.getWatchlist().then(res =>{
+     this.setState({
+      stock1: stockarray[0],
+      stock2: stockarray[1],
+      stock3: stockarray[2],
+      stock4: stockarray[3],
+      stock5: stockarray[4],
+      stock6: stockarray[5],
+      stock7: stockarray[6],
+      stock8: stockarray[7],
+      stock9: stockarray[8],
+      stock10: stockarray[9],
+      stock11: stockarray[10]
+    })
+    // console.log(res)
+    // console.log(this.state)
+
+  API.insertStock(this.state)
+        .then(res => this.getWatchlist())
+        .catch(err => console.log(err));
+        console.log(res)
+  });
+
 
 let bestpick;
 let beststock1;
-let stockarray = ['RTN', 'LMT', 'BA' , 'NOC', 'FDX']
 
-let stocks = [];
+
+// console.log(beststock2)
+let stockarray2 = ['BABA', 'GOOG', 'FB' , 'NFLX', 'MDB']
+let stockarray3 = ['RTN', 'LMT', 'BA' , 'NOC', 'FDX']
+
+
+
+
+
+// console.log(this.state.stock)
+
+
 //push to api/database and hav homepage grab from database.
 
-stocks.push('goog', 'nvda')
-
-let hi = this.props
-console.log(hi)
 
 //make user use this page only once. 
 //render 11 best stocks on home page, and alert user "that's it, use this"
-console.log(stocks)
 
 
 // API.getQuote(
@@ -133,7 +178,7 @@ console.log(stocks)
 //   ).then(res => {
 //   console.log(res)
 
-//   //function to rank the best stock
+//   // function to rank the best stock
 //   const rankingfunction = () => {
 //     // console.log(a + b);
 
@@ -270,20 +315,32 @@ console.log(stocks)
 //           // pept: 'calc'
 //         }]
 //       })
-  // })
+//   })
 
 }
-
+      
   render() {
-    return (
+    const title = this.state.stock;
 
+
+    return (
+      <div>
+
+      
+      Render Best Stocks: 
+      { title }
+      
       <DataTable
         title="Industrials"
         columns={columns}
         data={ this.state.tableData }
       />
+
+
+      </div>
     )
   }
 };
 
-export default S1;
+export default S1 ;
+
