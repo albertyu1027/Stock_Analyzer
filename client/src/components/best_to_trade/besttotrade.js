@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import "./besttotrade.css"
 import DataTable from 'react-data-table-component';
 import API from "../../utils/API";
-
-
-
+import S1 from "../sector_1";
 
 
 const columns = [

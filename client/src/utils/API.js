@@ -85,15 +85,14 @@ export default {
 
 
   	return Promise.all([
-  		promise1, 
-  		promise2, promise3, promise4, promise5, 
-  		promise6, 
-  		promise7, promise8, promise9, promise10,
+  		promise1, promise2, promise3, promise4, promise5, 
+  		promise6, promise7, promise8, promise9, promise10,
   		promise11, promise12, promise13, promise14, promise15,
   		promise16, promise17, promise18, promise19, promise20
 
   	]).then(function(stockarray) {
   	return stockarray
+    console.log(stockarray)
   	
 	})
 	.catch(function (err) {

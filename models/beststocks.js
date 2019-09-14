@@ -8,17 +8,7 @@ const Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 const StocksToTradeSchema = new Schema({
   // `stock` is required and of type String
-  stock1: { type: String },
-  stock2: { type: String },
-  stock3: { type: String },
-  stock4: { type: String },
-  stock5: { type: String },
-  stock6: { type: String },
-  stock7: { type: String },
-  stock8: { type: String },
-  stock9: { type: String },
-  stock10: { type: String },
-  stock11: { type: String },
+  stockarray: { type: Array },
   date: { type: Date, default: Date.now }
 
 });

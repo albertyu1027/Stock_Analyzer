@@ -4,6 +4,7 @@ import Nav from "../components/Nav";
 import S1 from "../components/sector_1";
 
 
+
 class Fundamentals extends Component {
 	state = {
 		price: 0,
@@ -23,7 +24,7 @@ render() {
 		<br />
 		<br />
 		<S1 />
-		
+
 		
 
 		</div>
