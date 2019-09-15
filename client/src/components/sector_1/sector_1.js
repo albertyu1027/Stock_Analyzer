@@ -75,21 +75,27 @@ class S1 extends Component {
   };
 }
 
+
+
 componentDidMount() {
+
 // this.analyzeStocks(industrialstocks[0], industrialstocks[1], industrialstocks[2], industrialstocks[3],industrialstocks[4])
 // this.analyzeStocks(fintech[0], fintech[1], fintech[2], fintech[3], fintech[4])
 // this.analyzeStocks(enterprisesoftware[0], enterprisesoftware[1], enterprisesoftware[2], enterprisesoftware[3],enterprisesoftware[4])
 // this.analyzeStocks(consumerstocks[0], consumerstocks[1], consumerstocks[2], consumerstocks[3], consumerstocks[4])
 // this.analyzeStocks(semistocks[0], semistocks[1], semistocks[2], semistocks[3], semistocks[4])
 
-this.getandPostAllInfo()
+// this.getandPostAllInfo()
+// this.getStocks()
+// this.saveStocks()
 }
+
 
 getandPostAllInfo = () => {
 
   API.getWatchlist().then(res =>{
     this.setState({
-        stockarray: semistocks
+        stockarray: bestarray
     })
     console.log(res)
     console.log(this.state)
@@ -98,9 +104,7 @@ getandPostAllInfo = () => {
       .then(res => API.getWatchlist())
       .catch(err => console.log(err));
         // console.log(this.state)
-      console.log(res)
-
-
+      console.log(this.state)
     });
 }
 
@@ -110,12 +114,11 @@ analyzeStocks = (a, b, c, d, e) => {
   API.getQuote(a, b, c, d, e)
   .then(res => {
     console.log(res)
-
+      let array = ''
       let beststock1;
       let bestpick;
    
     // function to rank the best stock
-    const rankingfunction = () => {
         for (let i=0; i<5; i++) {
           let pe = res[i].data.pegRatio
           // if (res[i].data.pegRatio === undefined) {
@@ -126,30 +129,10 @@ analyzeStocks = (a, b, c, d, e) => {
                beststock1 = res[i].data.companyName
               }
         }
-        bestarray.push(beststock1)
-        console.log(bestarray)
-        return bestarray
-        }
+        array = beststock1
+        bestarray.push(array)
 
-    rankingfunction()
 
-// TEST FUNCTION
-    // const rankingfunction = () => {
-    //     for (var i=0; i<5; i++) {
-    //       let peg = 0.5
-     
-    //       if (pe <1) {
-    //            // bestpick = Math.min(res[a].data.pegRatio)
-    //            beststock1 = 'BABA'
-    //           }
-    //     }
-    //     bestarray.push(beststock1)
-    //     console.log(bestarray)
-    //     return bestarray
-    //     }
-    
-    // rankingfunction()
-   
     // setState
     this.setState({
           tableData: [{
@@ -190,7 +173,7 @@ analyzeStocks = (a, b, c, d, e) => {
             profit: (res[2].data.profitMargin), 
             marketcap: (res[2].data.marketcap/1000000000),
             cr: (res[17].data.balancesheet[0].currentAssets + res[17].data.balancesheet[0].otherCurrentAssets)/res[17].data.balancesheet[0].totalCurrentLiabilities,
-            opt: res[12].data,
+            opt: res[12].data
 
 
           }]
@@ -226,6 +209,20 @@ analyzeStocks = (a, b, c, d, e) => {
           }]
         })
 
+    API.getWatchlist().then(res =>{
+    this.setState({
+        stockarray: bestarray
+    })
+    console.log(res)
+    console.log(this.state)
+
+    API.insertStock(this.state)
+      .then(res => API.getWatchlist())
+      .catch(err => console.log(err));
+        // console.log(this.state)
+      console.log(this.state)
+    });
+
     })
 }
 
@@ -236,7 +233,7 @@ analyzeStocks = (a, b, c, d, e) => {
       <div>
 
         <DataTable
-        title="Industrials"
+        title="Give me five stocks"
         columns={columns}
         data={ this.state.tableData }
       />

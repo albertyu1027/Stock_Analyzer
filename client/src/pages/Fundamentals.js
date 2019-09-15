@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Nav from "../components/Nav";
 import S1 from "../components/sector_1";
+import S2 from "../components/sector_2";
 
 
 
@@ -24,6 +25,7 @@ render() {
 		<br />
 		<br />
 		<S1 />
+		<S2 />
 
 		
 

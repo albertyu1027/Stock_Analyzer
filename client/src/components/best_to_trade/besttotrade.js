@@ -79,18 +79,17 @@ class BTT extends Component {
 
 
   componentDidMount() { 
+    this.showMeTheBest();
+  }
 
+  showMeTheBest = () => 
   API.getWatchlist().then(res =>{
     console.log(res)
-    
-  })
-
-    // <S1 />
 
     this.setState({
       tableData: 
         [{
-            market: this.props.stockTWO,
+            market: res.data[0].stockarray,
             current_price: 1222,
             direction: '100', 
             time: '100', 
@@ -102,42 +101,24 @@ class BTT extends Component {
             strategy: '100'
         }]
     })
-  //   const search = 'aapl'
-  // API.getQuote(search)
-  // .then(res => {
-  //   // console.log(res.data)
-  //     this.setState({
-  //       tableData: 
-  //       [{
-  //           market: search,
-  //           current_price: res.data.delayedPrice,
-  //           direction: '100', 
-  //           time: '100', 
-  //           iv: '100',
-  //           hv: '100',
-  //           skew: '100',
-  //           rsi: '100',
-  //           ma: '100',
-  //           strategy: '100'
-  //       }, 
-  //       {
-  //           market: res.data.symbol,
-  //           current_price: res.data.delayedPrice,
-  //           direction: '100', 
-  //           time: '100', 
-  //           iv: '100',
-  //           hv: '100',
-  //           skew: '100',
-  //           rsi: '100',
-  //           ma: '100',
-  //           strategy: '100'
-  //       }
-  //       ]
-  //   })
-  //     console.log(this.state)
-  // })
+    this.setState({
+          tableData: [...this.state.tableData, 
+          {
+            market: res.data[0].stockarray,
+            current_price: 1222,
+            direction: '100', 
+            time: '100', 
+            iv: '100',
+            hv: '100',
+            skew: '100',
+            rsi: '100',
+            ma: '100',
+            strategy: '100'
 
-}
+          }]
+        })
+ 
+    })
 
   render() {
 

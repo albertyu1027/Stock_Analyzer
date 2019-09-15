@@ -84,7 +84,7 @@ app.get("/", function(req, res) {
   // Grab every document in the Articles collection
   db.stocks
     .find()
-    .insert([{stock1: 'baba'}])
+    // .insert([{stock1: 'baba'}])
     .then(function(dbStocks) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbStocks);
