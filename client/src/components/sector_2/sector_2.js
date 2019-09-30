@@ -91,22 +91,22 @@ componentDidMount() {
 }
 
 
-getandPostAllInfo = () => {
+// getandPostAllInfo = () => {
 
-  API.getWatchlist().then(res =>{
-    this.setState({
-        stockarray: bestarray
-    })
-    console.log(res)
-    console.log(this.state)
+//   API.getWatchlist().then(res =>{
+//     this.setState({
+//         stockarray: bestarray
+//     })
+//     console.log(res)
+//     console.log(this.state)
 
-    API.insertStock(this.state)
-      .then(res => API.getWatchlist())
-      .catch(err => console.log(err));
-        // console.log(this.state)
-      console.log(this.state)
-    });
-}
+//     API.insertStock(this.state)
+//       .then(res => API.getWatchlist())
+//       .catch(err => console.log(err));
+//         // console.log(this.state)
+//       console.log(this.state)
+//     });
+// }
 
 analyzeStocks = (a, b, c, d, e) => {
 
@@ -233,7 +233,7 @@ analyzeStocks = (a, b, c, d, e) => {
       <div>
 
         <DataTable
-        title="Give me five stocks"
+        title="Technology"
         columns={columns}
         data={ this.state.tableData }
       />

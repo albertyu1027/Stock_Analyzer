@@ -56,12 +56,9 @@ const columns = [
 ];
 
   //call database for the stocks
-  let industrialstocks = ['LMT', 'BA' , 'NOC', 'FDX', 'RTN', 'HON', 'AME', 'ITT', 'TPIC', 'PWR']
-  let fintech = ['GS', 'SQ', 'JPM', 'BABA', 'MA', 'PYPL' ]
-  let enterprisesoftware = ['MDB', 'CRM', 'AAPL', 'ORCL', 'TEAM']
-  let consumerstocks = ['TSN', 'SAFM', 'KR', 'COST', 'TGT']
-  let semistocks = ['NVDA' ,'MU', 'AMAT', 'LRCX', 'XLNX']
+
   let bestarray  = []
+  let userarray = []
 
 //call database for a watchlist of stocks.
  
@@ -75,37 +72,8 @@ class S1 extends Component {
   };
 }
 
-
-
 componentDidMount() {
 
-// this.analyzeStocks(industrialstocks[0], industrialstocks[1], industrialstocks[2], industrialstocks[3],industrialstocks[4])
-// this.analyzeStocks(fintech[0], fintech[1], fintech[2], fintech[3], fintech[4])
-// this.analyzeStocks(enterprisesoftware[0], enterprisesoftware[1], enterprisesoftware[2], enterprisesoftware[3],enterprisesoftware[4])
-// this.analyzeStocks(consumerstocks[0], consumerstocks[1], consumerstocks[2], consumerstocks[3], consumerstocks[4])
-// this.analyzeStocks(semistocks[0], semistocks[1], semistocks[2], semistocks[3], semistocks[4])
-
-// this.getandPostAllInfo()
-// this.getStocks()
-// this.saveStocks()
-}
-
-
-getandPostAllInfo = () => {
-
-  API.getWatchlist().then(res =>{
-    this.setState({
-        stockarray: bestarray
-    })
-    console.log(res)
-    console.log(this.state)
-
-    API.insertStock(this.state)
-      .then(res => API.getWatchlist())
-      .catch(err => console.log(err));
-        // console.log(this.state)
-      console.log(this.state)
-    });
 }
 
 analyzeStocks = (a, b, c, d, e) => {
@@ -114,26 +82,8 @@ analyzeStocks = (a, b, c, d, e) => {
   API.getQuote(a, b, c, d, e)
   .then(res => {
     console.log(res)
-      let array = ''
-      let beststock1;
-      let bestpick;
-   
-    // function to rank the best stock
-        for (let i=0; i<5; i++) {
-          let pe = res[i].data.pegRatio
-          // if (res[i].data.pegRatio === undefined) {
-          //   let pe = 1
-          // }
-          if (pe >0) {
-               bestpick = Math.min(res[i].data.pegRatio)
-               beststock1 = res[i].data.companyName
-              }
-        }
-        array = beststock1
-        bestarray.push(array)
 
-
-    // setState
+    // setState and add data for rendering
     this.setState({
           tableData: [{
             market: res[5].data.symbol, 
@@ -142,8 +92,8 @@ analyzeStocks = (a, b, c, d, e) => {
             pr: res[0].data.priceToSales, 
             profit: (res[0].data.profitMargin), 
             marketcap: (res[0].data.marketcap/1000000000),
-            cr: (res[15].data.balancesheet[0].currentAssets + res[15].data.balancesheet[0].otherCurrentAssets)/res[15].data.balancesheet[0].totalCurrentLiabilities,
-            opt: res[10].data,
+            cr: (res[10].data.balancesheet[0].currentAssets + res[10].data.balancesheet[0].otherCurrentAssets)/res[10].data.balancesheet[0].totalCurrentLiabilities,
+            // opt: res[10].data,
 
           }]
         })
@@ -157,8 +107,8 @@ analyzeStocks = (a, b, c, d, e) => {
             pr: res[1].data.priceToSales, 
             profit: (res[1].data.profitMargin), 
             marketcap: (res[1].data.marketcap/1000000000),
-            cr: (res[16].data.balancesheet[0].currentAssets + res[16].data.balancesheet[0].otherCurrentAssets)/res[16].data.balancesheet[0].totalCurrentLiabilities,
-            opt: res[11].data,
+            cr: (res[11].data.balancesheet[0].currentAssets + res[11].data.balancesheet[0].otherCurrentAssets)/res[11].data.balancesheet[0].totalCurrentLiabilities,
+            // opt: res[11].data,
     
           }]
         })
@@ -172,8 +122,8 @@ analyzeStocks = (a, b, c, d, e) => {
             pr: res[2].data.priceToSales, 
             profit: (res[2].data.profitMargin), 
             marketcap: (res[2].data.marketcap/1000000000),
-            cr: (res[17].data.balancesheet[0].currentAssets + res[17].data.balancesheet[0].otherCurrentAssets)/res[17].data.balancesheet[0].totalCurrentLiabilities,
-            opt: res[12].data
+            cr: (res[12].data.balancesheet[0].currentAssets + res[12].data.balancesheet[0].otherCurrentAssets)/res[12].data.balancesheet[0].totalCurrentLiabilities,
+            // opt: res[12].data
 
 
           }]
@@ -188,8 +138,8 @@ analyzeStocks = (a, b, c, d, e) => {
             pr: res[3].data.priceToSales, 
             profit: (res[3].data.profitMargin), 
             marketcap: (res[3].data.marketcap/1000000000),
-            cr: (res[18].data.balancesheet[0].currentAssets + res[18].data.balancesheet[0].otherCurrentAssets)/res[18].data.balancesheet[0].totalCurrentLiabilities,
-            opt: res[13].data
+            cr: (res[13].data.balancesheet[0].currentAssets + res[13].data.balancesheet[0].otherCurrentAssets)/res[13].data.balancesheet[0].totalCurrentLiabilities,
+            // opt: res[13].data
 
           }]
         })
@@ -203,43 +153,119 @@ analyzeStocks = (a, b, c, d, e) => {
             pr: res[4].data.priceToSales, 
             profit: (res[4].data.profitMargin), 
             marketcap: (res[4].data.marketcap/1000000000),
-            cr: (res[19].data.balancesheet[0].currentAssets + res[19].data.balancesheet[0].otherCurrentAssets)/res[19].data.balancesheet[0].totalCurrentLiabilities,
-            opt: res[14].data
+            cr: (res[14].data.balancesheet[0].currentAssets + res[14].data.balancesheet[0].otherCurrentAssets)/res[14].data.balancesheet[0].totalCurrentLiabilities,
+            // opt: res[14].data
 
           }]
         })
 
-    API.getWatchlist().then(res =>{
-    this.setState({
-        stockarray: bestarray
-    })
-    console.log(res)
-    console.log(this.state)
+    // console.log(this.state)
 
-    API.insertStock(this.state)
-      .then(res => API.getWatchlist())
-      .catch(err => console.log(err));
+    //rank to find the best of the five stocks
+    let rankingarray = []
+    let besttrade = ''
+
+    for(let i=0; i<5; i++) {
+      let bestrank = rankingarray.push(this.state.tableData[i].peg)
+    }
+      console.log(rankingarray)
+      rankingarray.sort()
+
+      let filter = rankingarray.filter(function(value) {
+      return value > 0
+    })
+
+    for(let i=0; i<5; i++) {
+      if(filter[0] === this.state.tableData[i].peg) {
+        besttrade = this.state.tableData[i].market
+      }
+    }
+    console.log(besttrade)
+    bestarray.push(besttrade)
+
+//add data into Mongo Database. 
+//Allows Home page to grab all the best stocks at that time.
+      API.getWatchlist().then(res =>{
+      this.setState({
+          stockarray: bestarray
+      })
+      // console.log(res)
+      // console.log(this.state)
+
+      API.insertStock(this.state)
+        .then(res => API.getWatchlist())
+        .catch(err => console.log(err));
+          // console.log(this.state)
         // console.log(this.state)
-      console.log(this.state)
-    });
+      });
 
     })
+
+
 }
+
+
+
+handleFormSubmit = event => {
+  event.preventDefault();
+
+  let search = document.getElementsByClassName('grabthis')
+  //get element by classname returns an array
+  console.log(search)
+  for (let i=0; i<5; i++) {
+    if (search[i].value === '') {
+      alert('enter stocks')
+      userarray = []
+      return
+    } 
+    else {
+    userarray.push(search[i].value) 
+    search[i].value = ''
+    }
+  }
+
+  console.log(userarray)
+  this.analyzeStocks(
+    userarray[0],
+    userarray[1],
+    userarray[2],
+    userarray[3],
+    userarray[4],
+    )
+
+}
+
+
+
 
       
   render() {
 
     return (
-      <div>
+    <div>
+    <form>
+    <input className= 'grabthis' />
+    <input className= 'grabthis' />
+    <input className= 'grabthis' />
+    <input className= 'grabthis' />
+    <input className= 'grabthis' />
+
+    <button
+    onClick={this.handleFormSubmit}
+    >Add 5 Stocks from the Same industry
+    </button>
+    </form>
+
+    <div className = 'stocks'></div>
 
         <DataTable
-        title="Give me five stocks"
+        title="Sector"
         columns={columns}
         data={ this.state.tableData }
       />
 
 
-      </div>
+    </div>
     )
   }
 };

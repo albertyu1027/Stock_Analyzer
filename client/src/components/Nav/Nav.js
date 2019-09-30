@@ -9,10 +9,7 @@ const Nav = () =>
           <a href="Fundamentals">Analyze top Picks</a>
           <a href="Sentiment">Sentiment</a>
         <br />
-        <input className ="search"></input>
-        <button type="button">
-          <span className="infiltrate">Search/Add to DB</span>
-        </button>
+
       </div>
     </div>
   </nav>;

@@ -17,54 +17,60 @@ const columns = [
     sortable: true,
     right: true,
   },
-  {
-    name: 'Direction (Opinion or use PT)',
-    selector: 'direction',
+    {
+    name: 'Date',
+    selector: 'date',
     sortable: true,
     right: true,
   },
-  {
-    name: 'Duration',
-    selector: 'time',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'IV',
-    selector: 'iv',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'HV',
-    selector: 'hv',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Skew',
-    selector: 'skew',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'RSI',
-    selector: 'rsi',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: '200 MA',
-    selector: 'ma',
-    sortable: true,
-    right: true,
-  },
-  {
-    name: 'Strategy',
-    selector: 'strategy',
-    sortable: true,
-    right: true,
-  }
+  // {
+  //   name: 'Direction (Opinion or use PT)',
+  //   selector: 'direction',
+  //   sortable: true,
+  //   right: true,
+  // },
+  // {
+  //   name: 'Duration',
+  //   selector: 'time',
+  //   sortable: true,
+  //   right: true,
+  // },
+  // {
+  //   name: 'IV',
+  //   selector: 'iv',
+  //   sortable: true,
+  //   right: true,
+  // },
+  // {
+  //   name: 'HV',
+  //   selector: 'hv',
+  //   sortable: true,
+  //   right: true,
+  // },
+  // {
+  //   name: 'Skew',
+  //   selector: 'skew',
+  //   sortable: true,
+  //   right: true,
+  // },
+  // {
+  //   name: 'RSI',
+  //   selector: 'rsi',
+  //   sortable: true,
+  //   right: true,
+  // },
+  // {
+  //   name: '200 MA',
+  //   selector: 'ma',
+  //   sortable: true,
+  //   right: true,
+  // },
+  // {
+  //   name: 'Strategy',
+  //   selector: 'strategy',
+  //   sortable: true,
+  //   right: true,
+  // }
 ];
 
  
@@ -86,39 +92,133 @@ class BTT extends Component {
   API.getWatchlist().then(res =>{
     console.log(res)
 
+    if (res.data[0] === undefined) {
+      alert('Nothing to show')
+    } 
+    else {
+
     this.setState({
       tableData: 
         [{
             market: res.data[0].stockarray,
             current_price: 1222,
-            direction: '100', 
-            time: '100', 
-            iv: '100',
-            hv: '100',
-            skew: '100',
-            rsi: '100',
-            ma: '100',
-            strategy: '100'
+            date: res.data[0].date
+            // direction: '100', 
+            // time: '100', 
+            // iv: '100',
+            // hv: '100',
+            // skew: '100',
+            // rsi: '100',
+            // ma: '100',
+            // strategy: '100'
         }]
     })
+
+    } 
+
+    if (res.data[1] === undefined) {
+      alert('Add more stocks')
+      return
+    } 
+    else {
+
     this.setState({
           tableData: [...this.state.tableData, 
           {
-            market: res.data[0].stockarray,
+            market: res.data[1].stockarray,
             current_price: 1222,
-            direction: '100', 
-            time: '100', 
-            iv: '100',
-            hv: '100',
-            skew: '100',
-            rsi: '100',
-            ma: '100',
-            strategy: '100'
+            date: res.data[1].date
+            // direction: '100', 
+            // time: '100', 
+            // iv: '100',
+            // hv: '100',
+            // skew: '100',
+            // rsi: '100',
+            // ma: '100',
+            // strategy: '100'
 
           }]
-        })
- 
     })
+
+    }
+
+    if (res.data[2] === undefined) {
+      alert('Add more stocks')
+      return
+    } 
+    else {
+
+    this.setState({
+          tableData: [...this.state.tableData, 
+          {
+            market: res.data[2].stockarray,
+            current_price: 1222,
+            date: res.data[2].date
+            // direction: '100', 
+            // time: '100', 
+            // iv: '100',
+            // hv: '100',
+            // skew: '100',
+            // rsi: '100',
+            // ma: '100',
+            // strategy: '100'
+
+          }]
+    })
+
+    }
+
+    if (res.data[3] === undefined) {
+      alert('Add more stocks')
+      return
+    } 
+    else {
+
+    this.setState({
+          tableData: [...this.state.tableData, 
+          {
+            market: res.data[3].stockarray,
+            current_price: 1222,
+            date: res.data[3].date
+            // direction: '100', 
+            // time: '100', 
+            // iv: '100',
+            // hv: '100',
+            // skew: '100',
+            // rsi: '100',
+            // ma: '100',
+            // strategy: '100'
+
+          }]
+    })
+    }
+
+    if (res.data[4] === undefined) {
+      alert('Add more stocks')
+      return
+    } 
+    else {
+    this.setState({
+          tableData: [...this.state.tableData, 
+          {
+            market: res.data[3].stockarray,
+            current_price: 1222,
+            date: res.data[3].date
+            // direction: '100', 
+            // time: '100', 
+            // iv: '100',
+            // hv: '100',
+            // skew: '100',
+            // rsi: '100',
+            // ma: '100',
+            // strategy: '100'
+
+          }]
+    })
+
+    }
+ 
+  })
 
   render() {
 
@@ -127,7 +227,7 @@ class BTT extends Component {
 
     return (
       <DataTable
-        title="Best Available"
+        title="Top 5 Trades"
         columns={columns}
         data={ this.state.tableData }
         responsive
