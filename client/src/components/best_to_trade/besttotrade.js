@@ -7,13 +7,13 @@ import S1 from "../sector_1";
 
 const columns = [
   {
-    name: 'Market',
+    name: 'Best PEG (growth)',
     selector: 'market',
     sortable: true,
   },
   {
-    name: 'Current Price',
-    selector: 'current',
+    name: 'Best Cash Position',
+    selector: 'cash',
     sortable: true,
     right: true,
   },
@@ -100,8 +100,8 @@ class BTT extends Component {
     this.setState({
       tableData: 
         [{
-            market: res.data[0].stockarray,
-            current_price: 1222,
+            market: res.data[0].stockarray[0],
+            cash: res.data[0].stockarray[1],
             date: res.data[0].date
             // direction: '100', 
             // time: '100', 
@@ -125,8 +125,8 @@ class BTT extends Component {
     this.setState({
           tableData: [...this.state.tableData, 
           {
-            market: res.data[1].stockarray,
-            current_price: 1222,
+            market: res.data[1].stockarray[0],
+            cash: res.data[1].stockarray[1],
             date: res.data[1].date
             // direction: '100', 
             // time: '100', 
@@ -151,8 +151,8 @@ class BTT extends Component {
     this.setState({
           tableData: [...this.state.tableData, 
           {
-            market: res.data[2].stockarray,
-            current_price: 1222,
+            market: res.data[2].stockarray[0],
+            cash: res.data[2].stockarray[1],
             date: res.data[2].date
             // direction: '100', 
             // time: '100', 
@@ -177,8 +177,8 @@ class BTT extends Component {
     this.setState({
           tableData: [...this.state.tableData, 
           {
-            market: res.data[3].stockarray,
-            current_price: 1222,
+            market: res.data[3].stockarray[0],
+            cash: res.data[3].stockarray[1],
             date: res.data[3].date
             // direction: '100', 
             // time: '100', 
@@ -201,8 +201,8 @@ class BTT extends Component {
     this.setState({
           tableData: [...this.state.tableData, 
           {
-            market: res.data[3].stockarray,
-            current_price: 1222,
+            market: res.data[4].stockarray[0],
+            cash: res.data[4].stockarray[1],
             date: res.data[3].date
             // direction: '100', 
             // time: '100', 

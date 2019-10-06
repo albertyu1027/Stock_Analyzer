@@ -68,12 +68,17 @@ class S1 extends Component {
     this.state = {
       tableData: [],
       stockarray: []
-
   };
+  this.baseState = this.state
 }
 
 componentDidMount() {
 
+}
+
+disableButton = () => {
+  document.getElementById('searchstocks').disabled = true;
+  alert('Go to Home Page for Top Picks')
 }
 
 analyzeStocks = (a, b, c, d, e) => {
@@ -161,15 +166,16 @@ analyzeStocks = (a, b, c, d, e) => {
 
     // console.log(this.state)
 
-    //rank to find the best of the five stocks
+    //rank to find the best of the five stocks by PEG ratio
+
     let rankingarray = []
     let besttrade = ''
 
     for(let i=0; i<5; i++) {
       let bestrank = rankingarray.push(this.state.tableData[i].peg)
     }
-      console.log(rankingarray)
       rankingarray.sort()
+      console.log(rankingarray)
 
       let filter = rankingarray.filter(function(value) {
       return value > 0
@@ -182,6 +188,29 @@ analyzeStocks = (a, b, c, d, e) => {
     }
     console.log(besttrade)
     bestarray.push(besttrade)
+
+  //rank to find the best of the five stocks by Current Ratio - ability to pay liabilities
+    let rankingarrayCR = []
+    let besttradeCR = ''
+
+    for(let i=0; i<5; i++) {
+      let bestrankCR = rankingarrayCR.push(this.state.tableData[i].cr)
+    }
+
+      rankingarrayCR.sort(function(a,b){ return b-a })
+      console.log(rankingarrayCR)
+
+      let filter2 = rankingarrayCR.filter(function(value) {
+      return value > 0
+    })
+
+    for(let i=0; i<5; i++) {
+      if(filter2[0] === this.state.tableData[i].cr) {
+        besttradeCR = this.state.tableData[i].market
+      }
+    }
+    console.log(besttradeCR)
+    bestarray.push(besttradeCR)
 
 //add data into Mongo Database. 
 //Allows Home page to grab all the best stocks at that time.
@@ -233,6 +262,8 @@ handleFormSubmit = event => {
     userarray[4],
     )
 
+  this.disableButton()
+
 }
 
 
@@ -250,10 +281,11 @@ handleFormSubmit = event => {
     <input className= 'grabthis' />
     <input className= 'grabthis' />
 
-    <button
+    <button className='grabthis' id="searchstocks" 
     onClick={this.handleFormSubmit}
     >Add 5 Stocks from the Same industry
     </button>
+
     </form>
 
     <div className = 'stocks'></div>
