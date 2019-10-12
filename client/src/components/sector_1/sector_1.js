@@ -48,8 +48,8 @@ const columns = [
     right: true,
   },
   {
-    name: 'Others PT',
-    selector: 'opt',
+    name: 'Current Price',
+    selector: 'current',
     sortable: true,
     right: true,
   }
@@ -98,7 +98,7 @@ analyzeStocks = (a, b, c, d, e) => {
             profit: (res[0].data.profitMargin), 
             marketcap: (res[0].data.marketcap/1000000000),
             cr: (res[10].data.balancesheet[0].currentAssets + res[10].data.balancesheet[0].otherCurrentAssets)/res[10].data.balancesheet[0].totalCurrentLiabilities,
-            // opt: res[10].data,
+            current: res[5].data.latestPrice
 
           }]
         })
@@ -113,7 +113,7 @@ analyzeStocks = (a, b, c, d, e) => {
             profit: (res[1].data.profitMargin), 
             marketcap: (res[1].data.marketcap/1000000000),
             cr: (res[11].data.balancesheet[0].currentAssets + res[11].data.balancesheet[0].otherCurrentAssets)/res[11].data.balancesheet[0].totalCurrentLiabilities,
-            // opt: res[11].data,
+            current: res[6].data.latestPrice
     
           }]
         })
@@ -128,8 +128,7 @@ analyzeStocks = (a, b, c, d, e) => {
             profit: (res[2].data.profitMargin), 
             marketcap: (res[2].data.marketcap/1000000000),
             cr: (res[12].data.balancesheet[0].currentAssets + res[12].data.balancesheet[0].otherCurrentAssets)/res[12].data.balancesheet[0].totalCurrentLiabilities,
-            // opt: res[12].data
-
+            current: res[7].data.latestPrice
 
           }]
         })
@@ -144,7 +143,8 @@ analyzeStocks = (a, b, c, d, e) => {
             profit: (res[3].data.profitMargin), 
             marketcap: (res[3].data.marketcap/1000000000),
             cr: (res[13].data.balancesheet[0].currentAssets + res[13].data.balancesheet[0].otherCurrentAssets)/res[13].data.balancesheet[0].totalCurrentLiabilities,
-            // opt: res[13].data
+            current: res[8].data.latestPrice
+
 
           }]
         })
@@ -159,7 +159,7 @@ analyzeStocks = (a, b, c, d, e) => {
             profit: (res[4].data.profitMargin), 
             marketcap: (res[4].data.marketcap/1000000000),
             cr: (res[14].data.balancesheet[0].currentAssets + res[14].data.balancesheet[0].otherCurrentAssets)/res[14].data.balancesheet[0].totalCurrentLiabilities,
-            // opt: res[14].data
+            current: res[9].data.latestPrice
 
           }]
         })
@@ -170,6 +170,8 @@ analyzeStocks = (a, b, c, d, e) => {
 
     let rankingarray = []
     let besttrade = ''
+    let closingpricePeg;
+
 
     for(let i=0; i<5; i++) {
       let bestrank = rankingarray.push(this.state.tableData[i].peg)
@@ -184,14 +186,17 @@ analyzeStocks = (a, b, c, d, e) => {
     for(let i=0; i<5; i++) {
       if(filter[0] === this.state.tableData[i].peg) {
         besttrade = this.state.tableData[i].market
+        closingpricePeg = this.state.tableData[i].current
       }
     }
     console.log(besttrade)
     bestarray.push(besttrade)
+    bestarray.push(closingpricePeg)
 
   //rank to find the best of the five stocks by Current Ratio - ability to pay liabilities
     let rankingarrayCR = []
     let besttradeCR = ''
+    let closingpriceCR;
 
     for(let i=0; i<5; i++) {
       let bestrankCR = rankingarrayCR.push(this.state.tableData[i].cr)
@@ -207,10 +212,13 @@ analyzeStocks = (a, b, c, d, e) => {
     for(let i=0; i<5; i++) {
       if(filter2[0] === this.state.tableData[i].cr) {
         besttradeCR = this.state.tableData[i].market
+        closingpriceCR = this.state.tableData[i].current
       }
     }
     console.log(besttradeCR)
     bestarray.push(besttradeCR)
+    //push closing price into array. use this to log performance
+    bestarray.push(closingpriceCR)
 
 //add data into Mongo Database. 
 //Allows Home page to grab all the best stocks at that time.

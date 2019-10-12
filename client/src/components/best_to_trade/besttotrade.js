@@ -12,17 +12,47 @@ const columns = [
     sortable: true,
   },
   {
-    name: 'Best Cash Position',
-    selector: 'cash',
+    name: 'Current Price',
+    selector: 'currentprice',
     sortable: true,
-    right: true,
   },
-    {
+  {
+    name: 'Price during Search',
+    selector: 'searchprice',
+    sortable: true,
+  },
+  {
+    name: 'Delta Since Search',
+    selector: 'delta',
+    sortable: true,
+  },
+  {
+    name: 'Best Current Ratio',
+    selector: 'market2',
+    sortable: true,
+  },
+  {
+    name: 'Current Price',
+    selector: 'currentprice2',
+    sortable: true,
+  },
+  {
+    name: 'Price during Search',
+    selector: 'searchpriceCR',
+    sortable: true,
+  },
+  {
+    name: 'Delta Since Search',
+    selector: 'delta2',
+    sortable: true,
+  },
+  {
     name: 'Date',
     selector: 'date',
     sortable: true,
     right: true,
   },
+
   // {
   //   name: 'Direction (Opinion or use PT)',
   //   selector: 'direction',
@@ -90,10 +120,34 @@ class BTT extends Component {
 
   showMeTheBest = () => 
   API.getWatchlist().then(res =>{
-    console.log(res)
+    // console.log(res)
+
+    for (var i=0; i<5; i++) {
+
+    }
+
+    let beststock1 = res.data[0].stockarray[0]
+    let beststock2 = res.data[0].stockarray[2]
+    let beststock3 = res.data[1].stockarray[0]
+    let beststock4 = res.data[1].stockarray[2]
+    let beststock5 = res.data[2].stockarray[0]
+    let beststock6 = res.data[2].stockarray[2]
+    let beststock7 = res.data[3].stockarray[0]
+    let beststock8 = res.data[3].stockarray[2]
+    let beststock9 = res.data[4].stockarray[0]
+    let beststock10 = res.data[4].stockarray[2]
+
+    API.getOneQuote(beststock1, beststock2
+      , 
+      beststock3, beststock4, beststock5, 
+      beststock6, beststock7, beststock8, beststock9, beststock10
+      )
+    .then(res2 => {
+      // console.log(res2)
 
     if (res.data[0] === undefined) {
       alert('Nothing to show')
+      return
     } 
     else {
 
@@ -101,16 +155,14 @@ class BTT extends Component {
       tableData: 
         [{
             market: res.data[0].stockarray[0],
-            cash: res.data[0].stockarray[1],
+            currentprice: res2[0].data.latestPrice,
+            searchprice: res.data[0].stockarray[1],
+            delta: ((res2[0].data.latestPrice-res.data[0].stockarray[1])/res2[0].data.latestPrice).toFixed(2),
+            market2: res.data[0].stockarray[2],
+            currentprice2: res2[1].data.latestPrice,
+            searchpriceCR: res.data[0].stockarray[3],
+            delta2: ((res2[1].data.latestPrice-res.data[0].stockarray[3])/res2[1].data.latestPrice).toFixed(2),
             date: res.data[0].date
-            // direction: '100', 
-            // time: '100', 
-            // iv: '100',
-            // hv: '100',
-            // skew: '100',
-            // rsi: '100',
-            // ma: '100',
-            // strategy: '100'
         }]
     })
 
@@ -126,17 +178,14 @@ class BTT extends Component {
           tableData: [...this.state.tableData, 
           {
             market: res.data[1].stockarray[0],
-            cash: res.data[1].stockarray[1],
+            currentprice: res2[2].data.latestPrice,
+            searchprice: res.data[1].stockarray[1],
+            delta: ((res2[2].data.latestPrice-res.data[1].stockarray[1])/res2[2].data.latestPrice).toFixed(2),
+            market2: res.data[1].stockarray[2],
+            currentprice2: res2[3].data.latestPrice,
+            searchpriceCR: res.data[1].stockarray[3],
+            delta2: ((res2[3].data.latestPrice-res.data[1].stockarray[3])/res2[3].data.latestPrice).toFixed(2),
             date: res.data[1].date
-            // direction: '100', 
-            // time: '100', 
-            // iv: '100',
-            // hv: '100',
-            // skew: '100',
-            // rsi: '100',
-            // ma: '100',
-            // strategy: '100'
-
           }]
     })
 
@@ -152,17 +201,14 @@ class BTT extends Component {
           tableData: [...this.state.tableData, 
           {
             market: res.data[2].stockarray[0],
-            cash: res.data[2].stockarray[1],
+            currentprice: res2[4].data.latestPrice,
+            searchprice: res.data[2].stockarray[1],
+            delta: ((res2[4].data.latestPrice-res.data[2].stockarray[1])/res2[4].data.latestPrice).toFixed(2),
+            market2: res.data[2].stockarray[2],
+            currentprice2: res2[5].data.latestPrice,
+            searchpriceCR: res.data[2].stockarray[3],
+            delta2: ((res2[5].data.latestPrice-res.data[2].stockarray[3])/res2[5].data.latestPrice).toFixed(2),
             date: res.data[2].date
-            // direction: '100', 
-            // time: '100', 
-            // iv: '100',
-            // hv: '100',
-            // skew: '100',
-            // rsi: '100',
-            // ma: '100',
-            // strategy: '100'
-
           }]
     })
 
@@ -178,19 +224,18 @@ class BTT extends Component {
           tableData: [...this.state.tableData, 
           {
             market: res.data[3].stockarray[0],
-            cash: res.data[3].stockarray[1],
+            currentprice: res2[6].data.latestPrice,
+            searchprice: res.data[3].stockarray[1],
+            delta: ((res2[6].data.latestPrice-res.data[3].stockarray[1])/res2[6].data.latestPrice).toFixed(2),
+            market2: res.data[3].stockarray[2],
+            currentprice2: res2[7].data.latestPrice,
+            searchpriceCR: res.data[3].stockarray[3],
+            delta2: ((res2[7].data.latestPrice-res.data[3].stockarray[3])/res2[7].data.latestPrice).toFixed(2),
             date: res.data[3].date
-            // direction: '100', 
-            // time: '100', 
-            // iv: '100',
-            // hv: '100',
-            // skew: '100',
-            // rsi: '100',
-            // ma: '100',
-            // strategy: '100'
 
           }]
     })
+
     }
 
     if (res.data[4] === undefined) {
@@ -198,25 +243,27 @@ class BTT extends Component {
       return
     } 
     else {
+
     this.setState({
           tableData: [...this.state.tableData, 
           {
             market: res.data[4].stockarray[0],
-            cash: res.data[4].stockarray[1],
-            date: res.data[3].date
-            // direction: '100', 
-            // time: '100', 
-            // iv: '100',
-            // hv: '100',
-            // skew: '100',
-            // rsi: '100',
-            // ma: '100',
-            // strategy: '100'
+            currentprice: res2[8].data.latestPrice,
+            searchprice: res.data[4].stockarray[1],
+            delta: ((res2[8].data.latestPrice-res.data[4].stockarray[1])/res2[8].data.latestPrice).toFixed(2),
+            market2: res.data[4].stockarray[2],
+            currentprice2: res2[9].data.latestPrice,
+            searchpriceCR: res.data[4].stockarray[3],
+            delta2: ((res2[9].data.latestPrice-res.data[4].stockarray[3])/res2[9].data.latestPrice).toFixed(2),
+            date: res.data[4].date
 
           }]
     })
 
     }
+
+
+  })  
  
   })
 
@@ -227,7 +274,7 @@ class BTT extends Component {
 
     return (
       <DataTable
-        title="Top 5 Trades"
+        title="Top 5 Trades. Enter stocks once a month"
         columns={columns}
         data={ this.state.tableData }
         responsive

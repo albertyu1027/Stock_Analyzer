@@ -113,7 +113,7 @@ analyzeStocks = (a, b, c, d, e) => {
   //first stock- industrials
   API.getQuote(a, b, c, d, e)
   .then(res => {
-    console.log(res)
+    // console.log(res)
       let array = ''
       let beststock1;
       let bestpick;
@@ -213,14 +213,14 @@ analyzeStocks = (a, b, c, d, e) => {
     this.setState({
         stockarray: bestarray
     })
-    console.log(res)
-    console.log(this.state)
+    // console.log(res)
+    // console.log(this.state)
 
     API.insertStock(this.state)
       .then(res => API.getWatchlist())
       .catch(err => console.log(err));
         // console.log(this.state)
-      console.log(this.state)
+      // console.log(this.state)
     });
 
     })
