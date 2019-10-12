@@ -12,4 +12,4 @@ node_modules
 .sass-cache
 
 #ignore files with api data
-/client/utils/API.js
+/client/src/utils/API.js
