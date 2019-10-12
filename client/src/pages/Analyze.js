@@ -20,8 +20,6 @@ render() {
 
 		<BTT />
 	
-	add a black scholes calculator
-
 		</div>
 		
 	);
