@@ -72,38 +72,38 @@ tenminustwo = () => {
 }
 
   render() {
-
+   
 
     const options = {
       animationEnabled: true,
       title:{
         text: "Ten Year Minus Two Year"
       },
-      axisX: {
-        valueFormatString: "MM/MM/MM"
-      },
-      axisY: {
-        title: "10y - 2y Treasury",
-        prefix: "",
-        includeZero: false
-      },
+      // axisX: {
+      //   valueFormatString: "MM/MM/MM"
+      // },
+      // axisY: {
+      //   title: "10y - 2y Treasury",
+      //   prefix: "",
+      //   includeZero: false
+      // },
       data: [{
-        yValueFormatString: "-#.####",
+        // yValueFormatString: "-#.####",
         // xValueFormatString: '',
-        type: "spline",
+        type: "column",
         dataPoints: [
-          { x: new Date(2019, 0), y: -0.005 },
-          { x: new Date(2019, 1), y: -0.003 },
-          { x: new Date(2019, 2), y: -0.004 },
-          { x: new Date(2019, 3), y: -0.005 },
-          { x: new Date(2019, 4), y: -0.003 },
-          { x: new Date(2019, 5), y: -0.004 },
-          { x: new Date(2019, 6), y: -0.006 },
-          { x: new Date(2019, 7), y: -0.007 },
-          { x: new Date(2019, 8), y: -0.005 },
-          { x: new Date(2019, 9), y: -0.008 },
-          { x: new Date(2019, 10), y: -0.008 },
-          { x: new Date(2019, 11), y: -0.005 }
+          { x:  10 , y: -0.005 },
+          { x:  11 , y: -0.003 },
+          { x:  12 , y: -0.004 },
+          { x:  13 , y: -0.005 },
+          { x:  14 , y: -0.003 },
+          { x:  15 , y: -0.004 },
+          { x:  16 , y: -0.006 },
+          { x:  17 , y: -0.007 },
+          { x:  18 , y: -0.005 },
+          { x:  19 , y: -0.008 },
+          { x:  20 , y: -0.008 },
+          { x:  21 , y: -0.005 }
         ]
       }]
     }
