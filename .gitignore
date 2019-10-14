@@ -9,9 +9,9 @@ node_modules
 # Ignore files related to API keys
 .env
 
-# Ignore SASS config files
-.sass-cache
+# # Ignore SASS config files
+# .sass-cache
 
-#ignore files with api data
-/client/src/utils/API.js
-/client/node_modules
+# #ignore files with api data
+# /client/src/utils/API.js
+# /client/node_modules
