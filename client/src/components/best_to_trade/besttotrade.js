@@ -121,11 +121,6 @@ class BTT extends Component {
   showMeTheBest = () => 
   API.getWatchlist().then(res =>{
     // console.log(res)
-
-    for (var i=0; i<5; i++) {
-
-    }
-
     let beststock1 = res.data[0].stockarray[0]
     let beststock2 = res.data[0].stockarray[2]
     let beststock3 = res.data[1].stockarray[0]
@@ -232,7 +227,6 @@ class BTT extends Component {
             searchpriceCR: res.data[3].stockarray[3],
             delta2: ((res2[7].data.latestPrice-res.data[3].stockarray[3])/res2[7].data.latestPrice).toFixed(2),
             date: res.data[3].date
-
           }]
     })
 
@@ -256,22 +250,15 @@ class BTT extends Component {
             searchpriceCR: res.data[4].stockarray[3],
             delta2: ((res2[9].data.latestPrice-res.data[4].stockarray[3])/res2[9].data.latestPrice).toFixed(2),
             date: res.data[4].date
-
           }]
-    })
-
+      })
     }
-
-
   })  
  
   })
 
   render() {
-
     // console.log(this.props);
-
-
     return (
       <DataTable
         title="Top 5 Trades. Enter stocks once a month"
@@ -280,9 +267,6 @@ class BTT extends Component {
         responsive
         className = 'table1'
       />
- 
-
-
     )
   }
 };

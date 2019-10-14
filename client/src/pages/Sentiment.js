@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import Nav from "../components/Nav";
-import S1 from "../components/sector_1";
+import S2 from "../components/sector_2";
 
 class Sentiment extends Component {
 	state = {
@@ -21,7 +21,8 @@ render() {
 		<br />
 		<br />
 		<br />
-		<S1 />
+		
+		<S2 />
 
 		</div>
 		

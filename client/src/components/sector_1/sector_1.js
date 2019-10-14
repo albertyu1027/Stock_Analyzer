@@ -73,7 +73,6 @@ class S1 extends Component {
 }
 
 componentDidMount() {
-
 }
 
 disableButton = () => {
@@ -235,13 +234,8 @@ analyzeStocks = (a, b, c, d, e) => {
           // console.log(this.state)
         // console.log(this.state)
       });
-
     })
-
-
 }
-
-
 
 handleFormSubmit = event => {
   event.preventDefault();
@@ -267,17 +261,12 @@ handleFormSubmit = event => {
     userarray[1],
     userarray[2],
     userarray[3],
-    userarray[4],
+    userarray[4]
     )
-
+  
   this.disableButton()
-
 }
-
-
-
-
-      
+     
   render() {
 
     return (
@@ -299,11 +288,10 @@ handleFormSubmit = event => {
     <div className = 'stocks'></div>
 
         <DataTable
-        title="Sector"
+        title="Five of your Picks"
         columns={columns}
         data={ this.state.tableData }
       />
-
 
     </div>
     )
