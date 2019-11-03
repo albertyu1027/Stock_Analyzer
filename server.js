@@ -30,10 +30,17 @@ app.use(routes);
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/stockstotrade";
+// const MONGODB_URI = process.env.MONGODB_URI || "mongodb://stockanalyzer8:Diu@1027@ds059207.mlab.com:59207/heroku_4twfphdh";
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function(error) {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log("connected to the database")
+  }
+});
 
 
 
@@ -68,14 +75,6 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 //     });
 //   });
 // });
-
-
-
-
-
-
-
-
 
 
 

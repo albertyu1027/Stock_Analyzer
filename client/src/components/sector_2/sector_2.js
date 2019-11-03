@@ -3,11 +3,7 @@ import "./sector_2.css";
 import DataTable from 'react-data-table-component';
 import API from "../../utils/API";
 import BTT from "../best_to_trade";
-
-import CanvasJSReact from './canvasjs.react';
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
+import { Bar, Line, Pie } from 'react-chartjs-2';
 
   //call database for the stocks
   let industrialstocks = ['LMT', 'BA' , 'NOC', 'FDX', 'RTN', 'HON', 'AME', 'ITT', 'TPIC', 'PWR']
@@ -17,26 +13,78 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
   let semistocks = ['NVDA' ,'MU', 'AMAT', 'LRCX', 'XLNX']
   let bestarray  = []
 
-  let finalobject = {}
 
+  const columns = [
+  {
+    name: 'Recession Dates',
+    selector: 'dates',
+    // sortable: true,
+  },
+  {
+    name: 'Duration',
+    selector: 'duration',
+    // sortable: true,
+    right: true,
+  },
+  {
+    name: 'Unemployment Rate',
+    selector: 'unemployment',
+    // sortable: true,
+    right: true,
+  }
+  ]
+
+  // let finalobject = {}
 
 //call database for a watchlist of stocks.
  
-class S2 extends Component {
+class Chart extends Component {
     constructor(props) {
     super(props);
     this.state = {
-      tableData: [],
-      stockarray: []
+      chartData: {},
+      tableData: []
   };
 }
 
 
 componentDidMount() {
-  console.log(industrialstocks)
-  // this.tenminustwo()
-  console.log(finalobject)
+  // console.log(industrialstocks)
+  this.tenminustwo()
+  // console.log(finalobject)
+  this.recessionDates()
+}
 
+recessionDates = () => {
+  this.setState({
+    tableData: [
+      {
+        dates: "1/1/1980-7/1/1980",
+        duration: "0.5 years",
+        unemployment: "7.8%"
+      }, 
+      {
+        dates: "7/1/1981-11/1/1982",
+        duration: "1.5 years",
+        unemployment: "10.8%"
+      }, 
+      {
+        dates: "7/1/1990-3/1/1991",
+        duration: "8 Months",
+        unemployment: "7.8%"
+      },
+      {
+        dates: "3/1/2001-11/1/2001",
+        duration: "8 Months",
+        unemployment: "6.3%"
+      },
+      {
+        dates: "12/1/2007-6/1/2009",
+        duration: "1.5 years",
+        unemployment: "10%"
+      }
+    ]
+    })
 }
 
 tenminustwo = () => {
@@ -48,75 +96,57 @@ tenminustwo = () => {
 
     for (var i=0; i< 10000; i++) {
 
-    let one = res[0].data.dataset.data[i]
-    let two = res[1].data.dataset.data[i]
-    let diff = one[1]-two[1]
+      let one = res[0].data.dataset.data[i]
+      let two = res[1].data.dataset.data[i]
+      let diff = one[1]-two[1]
 
-    if (diff < 0) {
-      negativearraydates.push(one[0])
-      negativearray.push(diff)
+      if (diff < 0) {
+        negativearraydates.push(one[0])
+        negativearray.push(diff)
 
-    } else if (diff > 0) {
-      console.log('hello')
-    } else if (diff === null ){
-      alert('be careful of data')
-    }
-
+        } else if (diff > 0) {
+          // console.log('hello')
+        } else if (diff === null ){
+          alert('be careful of data')
+        }
     }
       // console.log(negativearray)
       // console.log(negativearraydates)
-      finalobject = Object.assign(...negativearraydates.map((k, i) =>({ [k]: negativearray[i]})))
-      console.log(finalobject)
+      // finalobject = Object.assign(...negativearraydates.map((k, i) =>({ [k]: negativearray[i]})))
+      // console.log(finalobject)
+
+      this.setState({
+        chartData:{
+          labels: negativearraydates,
+          datasets:[{
+            label: 'Ten Year Minus Two Year',
+            data: negativearray,
+            backgroundColor: 'blue'
+          }]
+        }
+      })
 
   })
 }
 
   render() {
-   
 
-    const options = {
-      animationEnabled: true,
-      title:{
-        text: "Ten Year Minus Two Year"
-      },
-      // axisX: {
-      //   valueFormatString: "MM/MM/MM"
-      // },
-      // axisY: {
-      //   title: "10y - 2y Treasury",
-      //   prefix: "",
-      //   includeZero: false
-      // },
-      data: [{
-        // yValueFormatString: "-#.####",
-        // xValueFormatString: '',
-        type: "column",
-        dataPoints: [
-          { x:  10 , y: -0.005 },
-          { x:  11 , y: -0.003 },
-          { x:  12 , y: -0.004 },
-          { x:  13 , y: -0.005 },
-          { x:  14 , y: -0.003 },
-          { x:  15 , y: -0.004 },
-          { x:  16 , y: -0.006 },
-          { x:  17 , y: -0.007 },
-          { x:  18 , y: -0.005 },
-          { x:  19 , y: -0.008 },
-          { x:  20 , y: -0.008 },
-          { x:  21 , y: -0.005 }
-        ]
-      }]
-    }
     return (
-    <div>
-      <CanvasJSChart options = {options}
-        /* onRef={ref => this.chart = ref} */
+      <div>
+
+      <DataTable 
+          title = "Recession Dates and Indicators"
+          columns={columns}
+          data={ this.state.tableData }/>
+
+      <Bar 
+      data={this.state.chartData}
       />
-      {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-    </div>
+      </div>
+      
     );
   }
 };
 
-export default S2 ;
+export default Chart ;
 
